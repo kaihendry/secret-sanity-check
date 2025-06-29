@@ -1,0 +1,18 @@
+on:
+  workflow_dispatch:
+  push:
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate credentials
+        run: |
+            echo "${{ secrets.JSON }}" > credentials.json
+            if ! jq -e . credentials.json >/dev/null; then
+            echo "Error: credentials.json is not a valid JSON file!"
+            exit 1
+            fi
+        shell: bash
