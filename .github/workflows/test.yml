@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Validate credentials
         run: |
-            echo "${{ vars.CLEARLYJSON }}" > credentials.json
+            echo '${{ vars.CLEARLYJSON }}' > credentials.json
             cat credentials.json
             if ! jq -e . credentials.json >/dev/null; then
             echo "Error: credentials.json is not a valid JSON file!"
